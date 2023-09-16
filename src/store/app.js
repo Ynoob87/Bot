@@ -1,7 +1,11 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("App", {
-  state: () => ({}),
+export const useAppStore = defineStore("app", {
+  state: () => ({
+    commandsActionMap: null,
+    client: null,
+  }),
+  
   getters: {},
   actions: {},
 });

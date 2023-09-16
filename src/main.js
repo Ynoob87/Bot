@@ -1,18 +1,19 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import vuelnit from "@/core/vue";
 import dotenv from "dotenv";
+import { useAppStore } from "@/store/app"
 
-import { loadCommands } from "@/core/loader";
+import { loadCommands, loadEvent } from "@/core/loader";
 
-loadCommands();
+vuelnit()
+dotenv.config()
 
-vuelnit();
-dotenv.config();
+loadCommands()
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const appStore = useAppStore()
+appStore.client = client
 
-client.once(Events.ClientReady, (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
-});
+loadEvent()
 
 client.login(process.env.TOKEN);
